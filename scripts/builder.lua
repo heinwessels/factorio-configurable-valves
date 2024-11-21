@@ -74,7 +74,7 @@ end
 
 ---@param valve LuaEntity
 ---@param player LuaPlayer?
-local function handle_valve_creation(valve, player)
+function builder.build(valve, player)
     local input_guage = create_hidden_guage(valve, true)
     local output_guage = create_hidden_guage(valve, false)
 
@@ -87,7 +87,7 @@ local function handle_valve_creation(valve, player)
 end
 
 ---@param valve LuaEntity
-local function handle_valve_destroyed(valve)
+function builder.destroy(valve)
     for _, name in pairs{
         "configurable-valve-guage-input",
         "configurable-valve-guage-output",
@@ -101,10 +101,18 @@ end
 
 ---@param event EventData.on_robot_built_entity|EventData.on_built_entity|EventData.script_raised_built|EventData.script_raised_revive|EventData.on_entity_cloned
 local function on_entity_created(event)
-    local entity = event.entity
+    local entity = event.entity or event.destination
     local player = event.player_index and game.get_player(event.player_index) or nil
     if entity.name == "configurable-valve" then
-        handle_valve_creation(entity, player)
+        if event.name == defines.events.on_entity_cloned then
+            -- If it's a clone event they destroy it and recreate it to make sure all the parts are there.
+            -- This is in case a mod calls `entity.clone(...)`. If it's an area or brush clone then all
+            -- the components will already be cloned so it won't be duplicated, cause this event is only
+            -- called _after_ all entities have been cloned.
+            builder.destroy(entity)
+        end
+
+        builder.build(entity, player)
     elseif entity.name == "entity-ghost" and entity.ghost_name == "configurable-valve" then
         local control_behaviour = entity.get_or_create_control_behavior()
         ---@cast control_behaviour LuaPumpControlBehavior
@@ -115,7 +123,7 @@ end
 local function on_entity_destroyed(event)
     local entity = event.entity
     if entity.name == "configurable-valve" then
-        handle_valve_destroyed(entity)
+        builder.destroy(entity)
     end
 end
 
