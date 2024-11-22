@@ -127,8 +127,8 @@ local function on_entity_destroyed(event)
     end
 end
 
----@param event EventData.on_player_rotated_entity
-local function on_player_rotated_entity(event)
+---@param event EventData.on_player_rotated_entity|EventData.on_player_flipped_entity
+local function on_entity_changed_direction(event)
     local valve = event.entity
     if valve.name ~= "configurable-valve" then return end
     for _, name in pairs{
@@ -136,7 +136,10 @@ local function on_player_rotated_entity(event)
         "configurable-valve-guage-output",
     } do
         local entity = valve.surface.find_entity(name, valve.position)
-        if entity then entity.direction = valve.direction end
+        if entity then
+            entity.direction = valve.direction
+            entity.mirroring = valve.mirroring -- Technically not required, because the valves just rotate.
+        end
     end
 end
 
@@ -154,7 +157,8 @@ builder.events = {
     [defines.events.script_raised_destroy] = on_entity_destroyed,
     [defines.events.on_space_platform_mined_entity] = on_entity_destroyed,
 
-    [defines.events.on_player_rotated_entity] = on_player_rotated_entity,
+    [defines.events.on_player_rotated_entity] = on_entity_changed_direction,
+    [defines.events.on_player_flipped_entity] = on_entity_changed_direction,
 }
 
 return builder
