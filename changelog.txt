@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
-Version: 1.0.0
-Date: ??.11.2024
+Version: 0.1.3
+Date: 22.11.2024
   Bugfixes:
     - Fix crash when configurable valve is cloned.
     - Fixed that flipping valves did not update internal entities.
