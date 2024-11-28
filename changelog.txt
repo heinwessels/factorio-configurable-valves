@@ -3,11 +3,13 @@ Version: 0.1.4
 Date: 22.11.2024
   Compatibility:
     - Added compatibility with Even Pickier Dollies.
+  Bugfixes:
+    - Fixed rare crash when quick-changing configuration using the key-bind.
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.3
 Date: 22.11.2024
   Bugfixes:
-    - Fix crash when configurable valve is cloned.
+    - Fixed crash when configurable valve is cloned.
     - Fixed that flipping valves did not update internal entities.
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.2

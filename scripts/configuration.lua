@@ -46,7 +46,7 @@ end
 function configuration.next_type(valve_type)
     local new_valve_type = valve_type and next(constants.valve_types, valve_type)
     if not new_valve_type then new_valve_type = next(constants.valve_types) end
-    assert(new_valve_type, "Failed finding valve after: "..valve_type)
+    assert(new_valve_type, "Failed finding valve after: "..(valve_type or "nil"))
     return new_valve_type
 end
 
