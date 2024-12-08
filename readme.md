@@ -16,6 +16,9 @@ If you're instead looking for valves being different entities then have a look a
 Should be comptatibile with most mods. If it's not compatible, please let me know.
     - **Pyanodons**: Will automatically migrate old Factorio 1.1 valves to their 2.0 counter part.
 
+# Settings
+- Startup setting for the valve's pump speed when it's open.
+
 # UPS Impact
 This valve has no measurable impact. It's the same UPS impact as using a pump + combinator + storage-tank to control fluid movement. There are no `on_tick` calculations.
 
