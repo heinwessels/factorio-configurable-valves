@@ -79,7 +79,7 @@ data:extend{
         },
         energy_source = { type = "void" },
         energy_usage = "29kW",
-        pumping_speed = 20,
+        pumping_speed = settings.startup["configurable-valve-pump-speed"].value / 60, --[[@as number value given per second, convert to per tick]]
         impact_category = "metal",
         open_sound = sounds.machine_open,
         close_sound = sounds.machine_close,

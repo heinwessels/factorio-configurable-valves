@@ -1,6 +1,8 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.2.0
 Date: 08.12.2024
+  Features:
+    - Added startup setting for the valve's pump speed when it's open.
   Compatibility:
     - Recipe and required technology is now compatible with more mods (#4 by branan).
     - [PyIndustry] Valve recipe and required technology is now based on deprecated Py valves instead of pump (#4 branan).
