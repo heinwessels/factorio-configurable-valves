@@ -1,4 +1,10 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.2.0
+Date: 08.12.2024
+  Compatibility:
+    - Recipe and required technology is now compatible with more mods (#4 by branan).
+    - [PyIndustry] Valve recipe and required technology is now based on deprecated Py valves instead of pump (#4 branan).
+---------------------------------------------------------------------------------------------------
 Version: 0.1.4
 Date: 28.11.2024
   Compatibility:
