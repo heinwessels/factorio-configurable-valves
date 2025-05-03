@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.2.1
+Date: 03.05.2025
+  Compatibility:
+    - [PyIndustry] Added a setting to disable the automatic migration of PyIndustry valves.
+---------------------------------------------------------------------------------------------------
 Version: 0.2.0
 Date: 08.12.2024
   Features:
