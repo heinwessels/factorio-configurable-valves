@@ -41,7 +41,7 @@ local function quick_toggle(input, event)
     valve.create_build_effect_smoke()
     local msg = {"", {"configurable-valves."..valve_type}}
     if constant then table.insert(msg, ": "..tostring(constant).."%") end
-    player.create_local_flying_text{text = msg, position = valve.position, speed = 20}
+    player.create_local_flying_text{text = msg, position = valve.position, speed = 0.7}
 end
 
 shortcuts.events = { }

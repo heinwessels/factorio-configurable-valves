@@ -1,6 +1,8 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.2.1
 Date: 03.05.2025
+  Changes:
+    - Slowed down flying text showing valve type and threshold.
   Compatibility:
     - [PyIndustry] Added a setting to disable the automatic migration of PyIndustry valves.
 ---------------------------------------------------------------------------------------------------
