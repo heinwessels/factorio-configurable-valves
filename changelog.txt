@@ -1,8 +1,10 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.2.2
-Date: 03.05.2025
+Date: 20.07.2025
   Graphics:
     - Added valve animations (snouz).
+  Changes:
+    - Limit valve pump speed in mod settings to the `max_fluid_flow` utility constant.
   Locale:
     - Fix missing locale for the setting to disable PyIndustry migration.
 ---------------------------------------------------------------------------------------------------
