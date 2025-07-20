@@ -1,6 +1,6 @@
 {
   "name": "configurable-valves",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "title": "Configurable Valves",
   "description": "Adds a single configurable valve that can be used for: overflow, top-up and one-way/check. Inspired by Flow Control and Advanced Fluid Handling. Fully configurable with custom levels with intuitive shortcuts.",
   "author": "stringweasel",

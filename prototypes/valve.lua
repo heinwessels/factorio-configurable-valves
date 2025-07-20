@@ -86,44 +86,100 @@ data:extend{
         {
           north =
           {
-            filename = "__configurable-valves__/graphics/configurable-valve/north.png",
-            width = 128,
-            height = 128,
-            scale = 0.5,
-            line_length = 1,
-            frame_count = 1,
-            animation_speed = 1,
+            layers = {
+              {
+                filename = "__configurable-valves__/graphics/configurable-valve/north.png",
+                width = 128,
+                height = 128,
+                scale = 0.5,
+                line_length = 1,
+                repeat_count = 8,
+                frame_count = 1,
+                animation_speed = 1,
+              },
+              {
+                filename = "__configurable-valves__/graphics/configurable-valve/anim/north.png",
+                width = 122,
+                height = 128,
+                scale = 0.5,
+                line_length = 8,
+                frame_count = 8,
+                animation_speed = 1,
+              }
+            },
           },
           east =
           {
-            filename = "__configurable-valves__/graphics/configurable-valve/east.png",
-            width = 128,
-            height = 128,
-            scale = 0.5,
-            line_length = 1,
-            frame_count = 1,
-            animation_speed = 1,
+            layers = {
+              {
+                filename = "__configurable-valves__/graphics/configurable-valve/east.png",
+                width = 128,
+                height = 128,
+                scale = 0.5,
+                line_length = 1,
+                repeat_count = 8,
+                frame_count = 1,
+                animation_speed = 1,
+              },
+              {
+                filename = "__configurable-valves__/graphics/configurable-valve/anim/east.png",
+                width = 112,
+                height = 128,
+                scale = 0.5,
+                line_length = 8,
+                frame_count = 8,
+                animation_speed = 1,
+              }
+            },
           },
           south =
           {
-            filename = "__configurable-valves__/graphics/configurable-valve/south.png",
-            width = 128,
-            height = 128,
-            scale = 0.5,
-            line_length = 1,
-            frame_count = 1,
-            animation_speed = 1,
+            layers = {
+              {
+                filename = "__configurable-valves__/graphics/configurable-valve/south.png",
+                width = 128,
+                height = 128,
+                scale = 0.5,
+                line_length = 1,
+                repeat_count = 8,
+                frame_count = 1,
+                animation_speed = 1,
+              },
+              {
+                filename = "__configurable-valves__/graphics/configurable-valve/anim/south.png",
+                width = 92,
+                height = 128,
+                scale = 0.5,
+                line_length = 8,
+                frame_count = 8,
+                animation_speed = 1,
+              }
+            },
           },
           west =
           {
-            filename = "__configurable-valves__/graphics/configurable-valve/west.png",
-            width = 128,
-            height = 128,
-            scale = 0.5,
-            line_length = 1,
-            frame_count = 1,
-            animation_speed = 1,
-          }
+            layers = {
+              {
+                filename = "__configurable-valves__/graphics/configurable-valve/west.png",
+                width = 128,
+                height = 128,
+                scale = 0.5,
+                line_length = 1,
+                repeat_count = 8,
+                frame_count = 1,
+                animation_speed = 1,
+              },
+              {
+                filename = "__configurable-valves__/graphics/configurable-valve/anim/west.png",
+                width = 102,
+                height = 128,
+                scale = 0.5,
+                line_length = 8,
+                frame_count = 8,
+                animation_speed = 1,
+              }
+            },
+          },
         },
 
         circuit_connector = circuit_connector_definitions.create_vector(universal_connector_template, {
