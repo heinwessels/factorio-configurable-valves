@@ -3,6 +3,8 @@ Version: 0.2.2
 Date: 03.05.2025
   Graphics:
     - Added valve animations (snouz).
+  Locale:
+    - Fix missing locale for the setting to disable PyIndustry migration.
 ---------------------------------------------------------------------------------------------------
 Version: 0.2.1
 Date: 03.05.2025
