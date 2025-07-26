@@ -1,5 +1,6 @@
 local configuration = require("__configurable-valves__.scripts.configuration")
 local config = require("__configurable-valves__.config")
+local math2d = require("math2d")
 
 ---@class ThresholdRendering
 ---@field render_object LuaRenderObject
@@ -71,7 +72,7 @@ local function visualize_config(player, valve, valve_config)
             surface = valve.surface,
             target = valve,
             color = {1, 1, 1, 0.8},
-            scale = 1.5,
+            scale = 1.5 * (valve_config.threshold_visualization_scale or 1),
             vertical_alignment = "middle",
             players = { player },
             alignment = "center",
@@ -85,10 +86,10 @@ local function visualize_config(player, valve, valve_config)
             surface = valve.surface,
             target = {
                 entity = valve,
-                offset = {0, 0.6} -- Offset a bit above the valve
+                offset = math2d.position.add({0, 0.6}, valve_config.type_visualization_offset or {0, 0}),
             },
             color = {1, 1, 1, 0.8},
-            scale = 1,
+            scale = 1 * (valve_config.type_visualization_scale or 1),
             vertical_alignment = "middle",
             players = { player },
             alignment = "center",
