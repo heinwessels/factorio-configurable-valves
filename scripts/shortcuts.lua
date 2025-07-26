@@ -1,6 +1,20 @@
 local configuration = require("__configurable-valves__.scripts.configuration")
 
+---@class ThresholdRendering
+---@field render_object LuaRenderObject
+---@field default_threshold number
+---@field valve LuaEntity?
+
+---@class PlayerData
+---@field render_threshold ThresholdRendering?
+
 local shortcuts = { }
+
+---@param threshold number
+---@return string
+local function format_threshold(threshold)
+    return string.format("%d%%", threshold)
+end
 
 ---@param input "toggle" | "minus" | "plus"
 ---@param event EventData.CustomInputEvent
@@ -39,12 +53,71 @@ local function quick_toggle(input, event)
     end
 
     valve.create_build_effect_smoke()
-    local msg = {"", {"configurable-valves."..valve_type}}
-    if constant then table.insert(msg, ": "..tostring(constant).."%") end
-    player.create_local_flying_text{text = msg, position = valve.position, speed = 0.7}
 end
 
-shortcuts.events = { }
+---@param player LuaPlayer
+---@param valve LuaEntity
+local function visualize_config(player, valve)
+    local control_behaviour = valve.get_or_create_control_behavior()
+    ---@cast control_behaviour LuaPumpControlBehavior
+    local circuit_condition = control_behaviour.circuit_condition --[[@as CircuitCondition]]
+    local thresholds = circuit_condition.constant
+    local valve_type = configuration.deduce_type(control_behaviour)
+
+    if thresholds and thresholds >= 0 and thresholds <= 100 then
+        rendering.draw_text{
+            text = format_threshold(thresholds),
+            surface = valve.surface,
+            target = valve,
+            color = {1, 1, 1, 0.8},
+            scale = 1.5,
+            vertical_alignment = "middle",
+            players = { player },
+            alignment = "center",
+            time_to_live = 1, -- We will draw every tick
+        }
+    end
+
+    if valve_type then
+        rendering.draw_text{
+            text = {"configurable-valves."..valve_type},
+            surface = valve.surface,
+            target = {
+                entity = valve,
+                offset = {0, 0.6} -- Offset a bit above the valve
+            },
+            color = {1, 1, 1, 0.8},
+            scale = 1,
+            vertical_alignment = "middle",
+            players = { player },
+            alignment = "center",
+            time_to_live = 1, -- We will draw every tick
+        }
+    end
+end
+
+local function on_tick()
+    -- All we're doing is just updating any threshold rendering that any players
+    -- might have while selecting a valve. This is to handle quick-toggles, copy-pasting,
+    -- multiplayer things, and whetever else might occur. Probably overkill but this function
+    -- will be so fast nobody will be able to measure it.
+
+    for _, player in pairs(game.connected_players) do
+        local valve = player.selected
+        if not valve then goto continue end
+        if valve.name ~= "configurable-valve" and not (
+            valve.name == "entity-ghost" and valve.ghost_name == "configurable-valve"
+        ) then goto continue end
+
+        visualize_config(player, valve)
+
+        ::continue::
+    end
+end
+
+shortcuts.events = {
+    [defines.events.on_tick] = on_tick,
+ }
 for input, custom_input in pairs({
     toggle = "configurable-valves-switch",
     minus = "configurable-valves-minus",

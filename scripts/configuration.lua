@@ -2,8 +2,6 @@ local constants = require("__configurable-valves__.constants")
 
 local configuration = { }
 
----@alias ValveType "overflow" | "top_up" | "one_way"
-
 ---@param behaviour LuaPumpControlBehavior
 ---@param valve_type ValveType
 ---@param player LuaPlayer?
