@@ -1,5 +1,6 @@
 local constants = require("__configurable-valves__.constants")
 local configuration = require("__configurable-valves__.scripts.configuration")
+local config = require("__configurable-valves__.config")
 
 local builder = { }
 local debug = false
@@ -103,7 +104,11 @@ end
 local function on_entity_created(event)
     local entity = event.entity or event.destination
     local player = event.player_index and game.get_player(event.player_index) or nil
-    if entity.name == "configurable-valve" then
+
+    local valve_config = config.get_useful_valve_config(entity)
+    if not valve_config then return end
+
+    if entity.name ~= "entity-ghost" then
         if event.name == defines.events.on_entity_cloned then
             -- If it's a clone event they destroy it and recreate it to make sure all the parts are there.
             -- This is in case a mod calls `entity.clone(...)`. If it's an area or brush clone then all
@@ -113,7 +118,7 @@ local function on_entity_created(event)
         end
 
         builder.build(entity, player)
-    elseif entity.name == "entity-ghost" and entity.ghost_name == "configurable-valve" then
+    else -- This is a ghost
         local control_behaviour = entity.get_or_create_control_behavior()
         ---@cast control_behaviour LuaPumpControlBehavior
         configuration.initialize(control_behaviour, player)
@@ -122,15 +127,17 @@ end
 
 local function on_entity_destroyed(event)
     local entity = event.entity
-    if entity.name == "configurable-valve" then
-        builder.destroy(entity)
-    end
+    local valve_config = config.get_useful_valve_config(entity)
+    if not valve_config then return end
+    builder.destroy(entity)
 end
 
 ---@param event EventData.on_player_rotated_entity|EventData.on_player_flipped_entity
 local function on_entity_changed_direction(event)
     local valve = event.entity
-    if valve.name ~= "configurable-valve" then return end
+    local valve_config = config.get_useful_valve_config(valve)
+    if not valve_config then return end
+
     for _, name in pairs{
         "configurable-valve-guage-input",
         "configurable-valve-guage-output",
@@ -144,8 +151,10 @@ local function on_entity_changed_direction(event)
 end
 
 local function on_entity_changed_position(event)
-    local valve = event.moved_entity
-    if valve.name ~= "configurable-valve" then return end
+    local valve = event.entity
+    local valve_config = config.get_useful_valve_config(valve)
+    if not valve_config then return end
+
     for _, name in pairs{
         "configurable-valve-guage-input",
         "configurable-valve-guage-output",

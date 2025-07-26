@@ -3,6 +3,8 @@ Version: 0.3.1
 Date: ??.??.2025
   Graphics:
     - Threshold and valve type are now always shown while valve is selected (similar to the mod Valves).
+  Compatibility:
+    - Allow other mods to add their own valves using the new `mod-data` mechanic.
 ---------------------------------------------------------------------------------------------------
 Version: 0.3.0
 Date: 20.07.2025

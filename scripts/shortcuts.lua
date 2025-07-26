@@ -1,4 +1,5 @@
 local configuration = require("__configurable-valves__.scripts.configuration")
+local config = require("__configurable-valves__.config")
 
 ---@class ThresholdRendering
 ---@field render_object LuaRenderObject
@@ -23,9 +24,8 @@ local function quick_toggle(input, event)
     if not player then return end
     local valve = player.selected
     if not valve then return end
-    if valve.name ~= "configurable-valve" and not (
-        valve.name == "entity-ghost" and valve.ghost_name == "configurable-valve"
-    ) then return end
+    local valve_config = config.get_useful_valve_config(valve)
+    if not valve_config then return end
 
     local control_behaviour = valve.get_or_create_control_behavior()
     ---@cast control_behaviour LuaPumpControlBehavior
@@ -57,7 +57,8 @@ end
 
 ---@param player LuaPlayer
 ---@param valve LuaEntity
-local function visualize_config(player, valve)
+---@param valve_config ConfigurableValveConfig
+local function visualize_config(player, valve, valve_config)
     local control_behaviour = valve.get_or_create_control_behavior()
     ---@cast control_behaviour LuaPumpControlBehavior
     local circuit_condition = control_behaviour.circuit_condition --[[@as CircuitCondition]]
@@ -104,13 +105,10 @@ local function on_tick()
 
     for _, player in pairs(game.connected_players) do
         local valve = player.selected
-        if not valve then goto continue end
-        if valve.name ~= "configurable-valve" and not (
-            valve.name == "entity-ghost" and valve.ghost_name == "configurable-valve"
-        ) then goto continue end
-
-        visualize_config(player, valve)
-
+        if not (valve and valve.valid) then goto continue end
+        local valve_config = config.get_useful_valve_config(valve)
+        if not valve_config then goto continue end
+        visualize_config(player, valve, valve_config)
         ::continue::
     end
 end
