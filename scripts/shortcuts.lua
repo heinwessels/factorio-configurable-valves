@@ -2,14 +2,6 @@ local configuration = require("__configurable-valves__.scripts.configuration")
 local config = require("__configurable-valves__.config")
 local math2d = require("math2d")
 
----@class ThresholdRendering
----@field render_object LuaRenderObject
----@field default_threshold number
----@field valve LuaEntity?
-
----@class PlayerData
----@field render_threshold ThresholdRendering?
-
 local shortcuts = { }
 
 ---@param threshold number

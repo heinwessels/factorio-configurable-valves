@@ -22,11 +22,12 @@ local function has_linked_pipe_connection(this, that)
 end
 
 ---@param valve LuaEntity
+---@param valve_config ConfigurableValveConfig
 ---@param is_input boolean else it's an output
 ---@return LuaEntity
-local function create_hidden_guage(valve, is_input)
+local function create_hidden_guage(valve, valve_config, is_input)
     local guage = valve.surface.create_entity{
-        name = "configurable-valve-guage-" .. (is_input and "input" or "output"),
+        name = valve_config.gauge_name .. (is_input and "-input" or "-output"),
         position = valve.position,
         force = valve.force,
         direction = valve.direction,
@@ -74,10 +75,11 @@ local function create_hidden_combinator(valve, guage, is_input)
 end
 
 ---@param valve LuaEntity
+---@param valve_config ConfigurableValveConfig
 ---@param player LuaPlayer?
-function builder.build(valve, player)
-    local input_guage = create_hidden_guage(valve, true)
-    local output_guage = create_hidden_guage(valve, false)
+function builder.build(valve, valve_config, player)
+    local input_guage = create_hidden_guage(valve, valve_config, true)
+    local output_guage = create_hidden_guage(valve, valve_config, false)
 
     create_hidden_combinator(valve, input_guage, true)
     create_hidden_combinator(valve, output_guage, false)
@@ -88,10 +90,11 @@ function builder.build(valve, player)
 end
 
 ---@param valve LuaEntity
-function builder.destroy(valve)
+---@param valve_config ConfigurableValveConfig
+function builder.destroy(valve, valve_config)
     for _, name in pairs{
-        "configurable-valve-guage-input",
-        "configurable-valve-guage-output",
+        valve_config.gauge_name.."-input",
+        valve_config.gauge_name.."-output",
         "valves-tiny-combinator-input",
         "valves-tiny-combinator-output",
     } do
@@ -114,10 +117,10 @@ local function on_entity_created(event)
             -- This is in case a mod calls `entity.clone(...)`. If it's an area or brush clone then all
             -- the components will already be cloned so it won't be duplicated, cause this event is only
             -- called _after_ all entities have been cloned.
-            builder.destroy(entity)
+            builder.destroy(entity, valve_config)
         end
 
-        builder.build(entity, player)
+        builder.build(entity, valve_config,player)
     else -- This is a ghost
         local control_behaviour = entity.get_or_create_control_behavior()
         ---@cast control_behaviour LuaPumpControlBehavior
@@ -129,7 +132,7 @@ local function on_entity_destroyed(event)
     local entity = event.entity
     local valve_config = config.get_useful_valve_config(entity)
     if not valve_config then return end
-    builder.destroy(entity)
+    builder.destroy(entity, valve_config)
 end
 
 ---@param event EventData.on_player_rotated_entity|EventData.on_player_flipped_entity
@@ -139,8 +142,8 @@ local function on_entity_changed_direction(event)
     if not valve_config then return end
 
     for _, name in pairs{
-        "configurable-valve-guage-input",
-        "configurable-valve-guage-output",
+        valve_config.gauge_name.."-input",
+        valve_config.gauge_name.."-output",
     } do
         local entity = valve.surface.find_entity(name, valve.position)
         if entity then
@@ -156,8 +159,8 @@ local function on_entity_changed_position(event)
     if not valve_config then return end
 
     for _, name in pairs{
-        "configurable-valve-guage-input",
-        "configurable-valve-guage-output",
+        valve_config.gauge_name.."-input",
+        valve_config.gauge_name.."-output",
         "valves-tiny-combinator-input",
         "valves-tiny-combinator-output",
     } do

@@ -1,5 +1,7 @@
 local constants = { }
 
+---@alias ValveType "overflow" | "top_up" | "one_way"
+
 ---@type table<string, SignalID>
 constants.signal = {
     each =      { type = 'virtual', name = "signal-each" },

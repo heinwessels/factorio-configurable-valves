@@ -21,6 +21,7 @@
 ---@field threshold_visualization_scale float? to apply to the threshold visualization number, default is 1.0
 ---@field type_visualization_scale float? to apply to the valve type visualization, default is 1.0
 ---@field type_visualization_offset MapPosition? to apply to the valve type visualization, default is {0, 0}
+---@field gauge_name string? name of the gauge to use for this valve, default is "configurable-valve-guage". Will be appended with "-input" or "-output"
 
 data:extend{
     {
