@@ -154,7 +154,8 @@ local function on_entity_changed_direction(event)
 end
 
 local function on_entity_changed_position(event)
-    local valve = event.entity
+    local valve = event.moved_entity
+    if not (valve and valve.valid) then return end
     local valve_config = config.get_useful_valve_config(valve)
     if not valve_config then return end
 
