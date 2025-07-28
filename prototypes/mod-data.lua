@@ -2,7 +2,7 @@
 --- Explanation:
 --- If you want your valves to also be managed by this mod then you need to add
 --- your valves name to the following mod-data prototype. This will allow my mod to
---- manage your valves thresholds, show warnings, etc. Please see the `data.ConfigurableValvesModValveConfig`
+--- manage your valves thresholds, hidden entities, etc. Please see the `data.ConfigurableValvesModValveConfig`
 --- for other options you can set for your valve.
 --- 
 --- Something like
