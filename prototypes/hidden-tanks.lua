@@ -31,6 +31,7 @@ local function create_hidden_tank(name, is_input)
                 "hide-alt-info",
             },
             selectable_in_game = false,
+            selection_priority = 1,
             hidden = true,
             max_health = 500,
             collision_box = {{-0.29, -0.45}, {0.29, 0.45}},

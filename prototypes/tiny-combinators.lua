@@ -17,6 +17,7 @@ local function tiny_combinator(name)
             "placeable-off-grid" -- To be directly above pump position
         },
         selectable_in_game = false,
+        selection_priority = 1,
         hidden = true,
         minable = {mining_time = 0.1, result = "arithmetic-combinator"},
         max_health = 150,
