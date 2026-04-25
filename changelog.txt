@@ -5,6 +5,8 @@ Date: 25.04.2026
     - Default valve type is now configurable in settings per player.
   Changes:
     - Changed the key-bind for switching valve types to Ctrl+Shift+R to avoid conflicts with Factory Planner.
+  Locale:
+    - Updated Russian translation by Eldrinn-Elantey.
 ---------------------------------------------------------------------------------------------------
 Version: 0.3.3
 Date: 28.09.2025
