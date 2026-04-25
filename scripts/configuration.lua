@@ -2,6 +2,15 @@ local constants = require("__configurable-valves__.constants")
 
 local configuration = { }
 
+---@param player LuaPlayer
+---@return ValveType
+local function get_default_for_player(player)
+    local setting = settings.get_player_settings(player)
+    local valve_type = setting["configurable-valve-default-type"].value --[[@as ValveType]]
+    assert(constants.valve_types[valve_type], "Invalid valve type in player settings: "..tostring(valve_type))
+    return valve_type
+end
+
 ---@param behaviour LuaPumpControlBehavior
 ---@param valve_type ValveType
 ---@param player LuaPlayer?
@@ -20,7 +29,8 @@ function configuration.initialize(behaviour, player)
     end
 
     behaviour.circuit_enable_disable = true
-    configuration.set_type(behaviour, "overflow", player)
+    local valve_type_to_use = player and get_default_for_player(player) or "overflow"
+    configuration.set_type(behaviour, valve_type_to_use, player)
 end
 
 ---@param behaviour LuaPumpControlBehavior

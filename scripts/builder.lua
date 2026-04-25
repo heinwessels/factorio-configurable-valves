@@ -106,7 +106,10 @@ end
 ---@param event EventData.on_robot_built_entity|EventData.on_built_entity|EventData.script_raised_built|EventData.script_raised_revive|EventData.on_entity_cloned
 local function on_entity_created(event)
     local entity = event.entity or event.destination
-    local player = event.player_index and game.get_player(event.player_index) or nil
+    local player =
+            event.player_index and game.get_player(event.player_index)
+            or entity.last_user --[[@as LuaPlayer]]
+            or nil -- Only used to determine default valve tyoe
 
     local valve_config = config.get_useful_valve_config(entity)
     if not valve_config then return end
@@ -120,7 +123,7 @@ local function on_entity_created(event)
             builder.destroy(entity, valve_config)
         end
 
-        builder.build(entity, valve_config,player)
+        builder.build(entity, valve_config, player)
     else -- This is a ghost
         local control_behaviour = entity.get_or_create_control_behavior()
         ---@cast control_behaviour LuaPumpControlBehavior

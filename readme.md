@@ -20,6 +20,7 @@ It's also possible for other modders to hook their own valve prototypes into thi
 
 # Settings
 - Startup setting for the valve's pump speed when it's open.
+- Default valve type when a new valve is placed (per player).
 
 # UPS Impact
 This valve has no measurable impact. It's the same UPS impact as using a pump + combinator + storage-tank to control fluid movement. There are no `on_tick` calculations.
