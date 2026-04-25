@@ -7,7 +7,7 @@ Adds a single configurable valve for your fluids. It can be configured for overf
 If you're instead looking for valves being different entities then have a look at [Valves](https://mods.factorio.com/mod/valves).
 
 # Shortcuts (configurable)
-- **Control + R**: Cycle between different default valve types.
+- **Control + Shift + R**: Cycle between different default valve types.
 - **Numpad +**: Increase threshold for overflow or top-up valves.
 - **Numpad -**: Increase threshold for overflow or top-up valves.
 

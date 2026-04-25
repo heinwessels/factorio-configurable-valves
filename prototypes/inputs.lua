@@ -2,7 +2,7 @@ data:extend{
     {
         type = "custom-input",
         name = "configurable-valves-switch",
-        key_sequence = "CONTROL + R",
+        key_sequence = "CONTROL + SHIFT + R",
         consuming = "none"
     },
     {
