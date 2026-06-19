@@ -15,6 +15,7 @@ If you're instead looking for valves being different entities then have a look a
 
 Should be comptatibile with most mods. If it's not compatible, please let me know.
     - **Pyanodons**: Will automatically migrate old Factorio 1.1 valves to their 2.0 counter part.
+    - **Nulluis**: Hides the valve entities added by this mod. Instead valve functionality is applied to the Nullius pumps.
 
 It's also possible for other modders to hook their own valve prototypes into this Valves mod. Then this mod will manage your custom mod's thresholds, manage hidden entities, etc. See the [mod-data.lua](https://github.com/heinwessels/factorio-configurable-valves/blob/master/prototypes/mod-data.lua) for more information.
 
