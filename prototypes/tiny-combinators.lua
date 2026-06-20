@@ -1,5 +1,10 @@
 local base = data.raw["arithmetic-combinator"]["arithmetic-combinator"]
 
+---@return data.LightDefinition
+local function empty_light()
+    return {intensity = 0, size = 0}
+end
+
 local function tiny_combinator(name)
     return {
         type = "arithmetic-combinator",
@@ -32,9 +37,9 @@ local function tiny_combinator(name)
         screen_light_offsets = {{0, 0}, {0, 0}, {0, 0}, {0, 0}},
         input_connection_points = base.input_connection_points,
         output_connection_points = base.output_connection_points,
-        activity_led_light = base.activity_led_light,
-        screen_light = base.screen_light,
-        activity_led_sprites = base.activity_led_sprites,
+        activity_led_light = empty_light(),
+        screen_light = empty_light(),
+        activity_led_sprites = util.empty_sprite(),
     }
 end
 
