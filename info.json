@@ -1,12 +1,12 @@
 {
   "name": "configurable-valves",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "title": "Configurable Valves",
   "description": "Adds a single configurable valve that can be used for: overflow, top-up and one-way/check. Inspired by Flow Control and Advanced Fluid Handling. Fully configurable with custom levels with intuitive shortcuts.",
   "author": "stringweasel",
-  "factorio_version": "2.0",
+  "factorio_version": "2.1",
   "dependencies": [ 
-    "base >= 2.0.60"
+    "base >= 2.1.6"
   ],
   "package":{
     "ignore":[ "*.md", "*.zip", "mod-page/*" ]

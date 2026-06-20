@@ -1,3 +1,6 @@
+require ("__base__.prototypes.entity.pipecovers")
+require ("circuit-connector-sprites")
+
 local function get_pipe_connections(is_input)
     if is_input then
         return {

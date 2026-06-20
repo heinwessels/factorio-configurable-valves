@@ -21,7 +21,7 @@ end
 ---@type data.TechnologyPrototype?
 local tech_to_unlock
 for _, technology in pairs(data.raw.technology) do
-    if technology.effects then			
+    if technology.effects then
         for index, effect in pairs(technology.effects) do
             if effect.type == "unlock-recipe" then
                 if effect.recipe == base_tech_item then
