@@ -34,7 +34,7 @@ local function create_hidden_guage(valve, valve_config, is_input)
     }
     assert(guage)
     guage.destructible = false
-    guage.fluidbox.add_linked_connection(31113, valve, 31113 + (is_input and -1 or 1))
+    guage.add_fluid_box_linked_connection(31113, valve, 31113 + (is_input and -1 or 1))
     if debug then assert(has_linked_pipe_connection(valve, guage)) end
     return guage
 end
