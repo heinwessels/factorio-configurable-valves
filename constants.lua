@@ -16,4 +16,14 @@ constants.valve_types = {
     one_way     = { comparator = '>', first_signal = constants.signal.input,  second_signal = constants.signal.output, },
 }
 
+if helpers.stage == "runtime" then
+    -- Set the conditions to mimic the default threshold settings
+    for _, my_valve_type in pairs({"overflow", "top_up"}) do
+        local default_threshold = tonumber(settings.startup["configurable-valve-default-threshold-"..my_valve_type].value)
+        assert(default_threshold)
+        assert(constants.valve_types[my_valve_type].constant)
+        constants.valve_types[my_valve_type].constant = tonumber(default_threshold )
+    end
+end
+
 return constants
