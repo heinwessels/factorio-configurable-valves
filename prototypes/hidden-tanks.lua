@@ -4,13 +4,13 @@ require ("circuit-connector-sprites")
 local function get_pipe_connections(is_input)
     if is_input then
         return {
-            { direction = defines.direction.north, position = {0, 0}, flow_direction = "input-output" },
-            { connection_type = "linked", flow_direction = "input-output", linked_connection_id=31113 }
+            { direction = defines.direction.north, position = {0, 0}, flow_direction = "input-output", hide_connection_info = true },
+            { connection_type = "linked", flow_direction = "input-output", linked_connection_id=31113, hide_connection_info = true }
         }
     else
         return {
-            { connection_type = "linked", flow_direction = "input-output", linked_connection_id=31113 },
-            { direction = defines.direction.south, position = {0, 0}, flow_direction = "input-output" }
+            { connection_type = "linked", flow_direction = "input-output", linked_connection_id=31113, hide_connection_info = true },
+            { direction = defines.direction.south, position = {0, 0}, flow_direction = "input-output", hide_connection_info = true }
         }
     end
 end
@@ -44,7 +44,6 @@ local function create_hidden_tank(name, is_input)
                 volume = 100,
                 pipe_covers = pipecoverspictures(),
                 pipe_connections = get_pipe_connections(is_input),
-                hide_connection_info = true,
                 max_pipeline_extent = 1000000, -- Big number, nobody would build this big right?
             },
             show_fluid_icon = false,
